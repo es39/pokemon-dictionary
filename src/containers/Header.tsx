@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <HeaderStyle>
       <FiMenu />
-      <div></div>
     </HeaderStyle>
   );
 };
@@ -16,4 +15,6 @@ const HeaderStyle = styled.header`
   width: 100vw;
   height: 60px;
   background: red;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  position: fixed;
 `;
