@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from 'GlobalStyle';
+import { Footer, Header } from 'containers';
+import PokeDictionary from 'pages/PokeDictionary';
+import TypeDictionary from 'pages/TypeDictionary';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStyle />
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<PokeDictionary />} />
+          <Route path="/typedic" element={<TypeDictionary />} />
+          <Route path="/genedic" element={<TypeDictionary />} />
+        </Routes>
+        <ToastContainer />
+      </main>
+      <Footer />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
