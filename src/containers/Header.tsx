@@ -1,8 +1,10 @@
+import { FiMenu } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const Header = () => {
   return (
     <HeaderStyle>
+      <FiMenu />
       <div></div>
     </HeaderStyle>
   );
