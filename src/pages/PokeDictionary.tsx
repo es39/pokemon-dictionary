@@ -5,9 +5,11 @@ const PokeDictionary = () => {
   return (
     <Container>
       <SearchBar>검색창</SearchBar>
-      <PokemonCards>
-        <PokemonCard />
-      </PokemonCards>
+      <CardContainer>
+        <PokemonCards>
+          <PokemonCard />
+        </PokemonCards>
+      </CardContainer>
     </Container>
   );
 };
@@ -16,10 +18,8 @@ export default PokeDictionary;
 
 const Container = styled.main`
   width: 100vw;
-  height: 100vh;
   background-color: yellow;
   flex-direction: column;
-  justify-content: start;
 `;
 
 const SearchBar = styled.section`
@@ -29,8 +29,16 @@ const SearchBar = styled.section`
   height: 50px;
 `;
 
-const PokemonCards = styled.section`
+const CardContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const PokemonCards = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 80%;
+  height: 100%;
 `;
