@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/" element={<PokeDictionary />} />
         <Route path="/typedic" element={<TypeDictionary />} />
         <Route path="/genedic" element={<GeneDictionary />} />
-        <Route path="/:contentId" element={<PokemonInfo />} />
+        <Route path="/:id" element={<PokemonInfo />} />
       </Routes>
       <Footer />
     </BrowserRouter>
