@@ -42,3 +42,7 @@ const PokemonCards = styled.section`
   width: 80%;
   height: 100%;
 `;
+
+/* TODO:
+1. 로딩 화면 구현
+*/
