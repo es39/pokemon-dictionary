@@ -1,4 +1,5 @@
 import pokeAxios from 'api/pokeAxios';
+import { pokemonName } from 'interfaces/Pokemon.interface';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -12,7 +13,7 @@ const PokemonCard = () => {
   const axiosNum = 9;
   const id = 1;
 
-  const handleCardClick = () => {
+  const handleCardClick = (id: number) => {
     navigate(`/${id}`);
   };
 
@@ -20,7 +21,7 @@ const PokemonCard = () => {
     pokeAxios
       .get(`/pokemon?limit=${axiosNum}`)
       .then(res => {
-        // console.log(res);
+        // console.log(res.data.results);
         setPokemon(res.data.results);
       })
       .catch(err => console.log(err));
@@ -34,8 +35,8 @@ const PokemonCard = () => {
     pokeAxios
       .get(`/pokemon/${id}`)
       .then(res => {
-        // console.log(res.data.sprites);
         console.log(res.data);
+        // console.log(res.data);
         setPokeImg(res.data.sprites.front_default);
         setPokeType(res.data.types);
       })
@@ -48,14 +49,20 @@ const PokemonCard = () => {
 
   return (
     <CardStyle>
-      {pokemon.map((el: any, index: number) => (
-        <li className="pokemon-card" key={index} onClick={handleCardClick}>
+      {pokemon.map((el: pokemonName, index: number) => (
+        <li
+          className="pokemon-card"
+          key={index}
+          onClick={() => handleCardClick(id)}
+        >
           <CardContent>
             <img src={pokeImg} />
             {el.name}
-            {pokeType.map((el: any, index: number) => (
-              <li key={index}>{el.type.name}</li>
-            ))}
+            <TypeContent>
+              {pokeType.map((el: any, index: number) => (
+                <li key={index}>{el.type.name}</li>
+              ))}
+            </TypeContent>
           </CardContent>
         </li>
       ))}
@@ -95,6 +102,16 @@ const CardContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const TypeContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  > li {
+    padding: 5px;
+  }
 `;
 
 /* FIXME: 
