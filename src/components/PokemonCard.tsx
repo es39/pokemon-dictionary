@@ -1,55 +1,72 @@
-import pokeAxios from 'api/pokeAxios';
-import { pokemonName } from 'interfaces/Pokemon.interface';
+import { type } from 'interfaces/Pokemon.interface';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from './Loader';
 
 const PokemonCard = () => {
-  const [pokemon, setPokemon] = useState([]);
-  // const [pokeImg, setPokeImg] = useState('');
-  const [pokeType, setPokeType] = useState([]);
-  // const [pokeId, setPokeId] = useState<number>();
+  const [pokeInfo, setPokeInfo] = useState<any>([]);
+  const [pokeName, setPokeName] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
-
-  const axiosNum = 9;
-  // const pokeId = 1;
 
   const handleCardClick = (id: number) => {
     navigate(`/${id}`);
   };
 
-  const getPokemonList = () => {
-    pokeAxios
-      .get(`/pokemon?limit=${axiosNum}`)
+  // * 1세대 기준 포켓몬 정보
+  const fetchPokemonInfo = () => {
+    const infoArr = [];
+    for (let i = 1; i <= 151; i++) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+      infoArr.push(fetch(url).then(res => res.json()));
+    }
+    Promise.all(infoArr)
       .then(res => {
-        // console.log(res.data.results);
-        setPokemon(res.data.results);
+        const pokeInfo = res.map(el => ({
+          name: el.name,
+          image: el.sprites['front_default'],
+          type: el.types.map((type: type) => type.type.name).join(', '),
+          id: el.id,
+        }));
         setIsLoading(false);
+        return pokeInfo;
+      })
+      .then(res => {
+        setPokeInfo(res);
       })
       .catch(err => console.log(err));
   };
 
   useEffect(() => {
-    getPokemonList();
+    fetchPokemonInfo();
   }, []);
 
-  const getPokemonImg = async () => {
-    await pokeAxios
-      .get(`/pokemon`, { params: { limit: 151 } })
+  // * 1세대 기준 포켓몬 한글 이름
+  const fetchPokemonName = () => {
+    const nameArr = [];
+    for (let i = 1; i <= 151; i++) {
+      const url = `https://pokeapi.co/api/v2/pokemon-species/${i}`;
+      nameArr.push(fetch(url).then(res => res.json()));
+    }
+    Promise.all(nameArr)
       .then(res => {
-        console.log(res.data);
-        // console.log(res.data);
-        // setPokeImg(res.data.sprites.front_default);
-        setPokeType(res.data.types);
+        // console.log(res[0]);
+        const pokeName = res.map(el => ({
+          id: el.id,
+          koreaName: el.names[2].name,
+        }));
         setIsLoading(false);
+        return pokeName;
+      })
+      .then(res => {
+        setPokeName(res);
       })
       .catch(err => console.log(err));
   };
-
+  // console.log(pokeName);
   useEffect(() => {
-    getPokemonImg();
+    fetchPokemonName();
   }, []);
 
   return (
@@ -57,22 +74,22 @@ const PokemonCard = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        pokemon &&
-        pokemon.map((el: pokemonName, idx: number) => (
+        pokeInfo &&
+        pokeName &&
+        pokeInfo.map((el: any, infoId: number) => (
           <li
             className="pokemon-card"
-            key={idx}
-            onClick={() => handleCardClick(idx)}
+            key={infoId + 1}
+            onClick={() => handleCardClick(infoId + 1)}
           >
             <CardContent>
-              {/* <img src={pokeImg[idx]} /> */}
-              {el.name}
-              <TypeContent>
-                {pokeType &&
-                  pokeType.map((el: any, idx: number) => (
-                    <li key={idx}>{el.type.name}</li>
-                  ))}
-              </TypeContent>
+              <img src={el.image} />
+              {pokeName.map((el: any, nameId: number) =>
+                infoId === nameId ? (
+                  <li key={nameId + 1}>{el.koreaName}</li>
+                ) : null
+              )}
+              <div>{el.type}</div>
             </CardContent>
           </li>
         ))
@@ -115,15 +132,15 @@ const CardContent = styled.div`
   flex-direction: column;
 `;
 
-const TypeContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  > li {
-    padding: 5px;
-  }
-`;
+// const TypeContent = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 5px;
+//   > li {
+//     padding: 5px;
+//   }
+// `;
 
 /* FIXME: 
 1. pokemon/1(id) : 해당 포켓몬 정보
