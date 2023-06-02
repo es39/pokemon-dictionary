@@ -130,6 +130,10 @@ const CardContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 5px;
+  > div {
+    padding: 5px;
+  }
 `;
 
 // const TypeContent = styled.div`
