@@ -1,8 +1,10 @@
+// * 포켓몬 영문이름
 interface pokemonName {
   name: string;
   url: string;
 }
 
+// * 포켓몬 이미지
 interface pokemonImg {
   back_default: string;
   front_default: string;
@@ -10,6 +12,7 @@ interface pokemonImg {
   front_shiny: string;
 }
 
+// * 포켓몬 타입
 interface type {
   slot: number;
   type: {
@@ -32,5 +35,13 @@ interface pokeSprites {
     };
   };
 }
+
+// * 포켓몬 정보
+// interface pokemonInfo {
+//   name: string;
+//   image: string;
+//   type: string;
+//   id: number;
+// }
 
 export type { pokemonName, pokemonImg, type, pokeSprites };
