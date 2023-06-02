@@ -44,5 +44,5 @@ const PokemonCards = styled.section`
 `;
 
 /* TODO:
-1. 로딩 화면 구현
+1. 로딩 화면 구현 * 
 */
