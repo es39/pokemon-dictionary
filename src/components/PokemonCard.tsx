@@ -3,15 +3,18 @@ import { pokemonName } from 'interfaces/Pokemon.interface';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import Loader from './Loader';
 
 const PokemonCard = () => {
   const [pokemon, setPokemon] = useState([]);
-  const [pokeImg, setPokeImg] = useState('');
+  // const [pokeImg, setPokeImg] = useState('');
   const [pokeType, setPokeType] = useState([]);
+  // const [pokeId, setPokeId] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const axiosNum = 9;
-  const id = 1;
+  // const pokeId = 1;
 
   const handleCardClick = (id: number) => {
     navigate(`/${id}`);
@@ -23,6 +26,7 @@ const PokemonCard = () => {
       .then(res => {
         // console.log(res.data.results);
         setPokemon(res.data.results);
+        setIsLoading(false);
       })
       .catch(err => console.log(err));
   };
@@ -31,14 +35,15 @@ const PokemonCard = () => {
     getPokemonList();
   }, []);
 
-  const getPokemonImg = () => {
-    pokeAxios
-      .get(`/pokemon/${id}`)
+  const getPokemonImg = async () => {
+    await pokeAxios
+      .get(`/pokemon`, { params: { limit: 151 } })
       .then(res => {
         console.log(res.data);
         // console.log(res.data);
-        setPokeImg(res.data.sprites.front_default);
+        // setPokeImg(res.data.sprites.front_default);
         setPokeType(res.data.types);
+        setIsLoading(false);
       })
       .catch(err => console.log(err));
   };
@@ -49,23 +54,29 @@ const PokemonCard = () => {
 
   return (
     <CardStyle>
-      {pokemon.map((el: pokemonName, index: number) => (
-        <li
-          className="pokemon-card"
-          key={index}
-          onClick={() => handleCardClick(id)}
-        >
-          <CardContent>
-            <img src={pokeImg} />
-            {el.name}
-            <TypeContent>
-              {pokeType.map((el: any, index: number) => (
-                <li key={index}>{el.type.name}</li>
-              ))}
-            </TypeContent>
-          </CardContent>
-        </li>
-      ))}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        pokemon &&
+        pokemon.map((el: pokemonName, idx: number) => (
+          <li
+            className="pokemon-card"
+            key={idx}
+            onClick={() => handleCardClick(idx)}
+          >
+            <CardContent>
+              {/* <img src={pokeImg[idx]} /> */}
+              {el.name}
+              <TypeContent>
+                {pokeType &&
+                  pokeType.map((el: any, idx: number) => (
+                    <li key={idx}>{el.type.name}</li>
+                  ))}
+              </TypeContent>
+            </CardContent>
+          </li>
+        ))
+      )}
     </CardStyle>
   );
 };
