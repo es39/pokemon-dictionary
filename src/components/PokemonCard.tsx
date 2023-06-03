@@ -77,7 +77,7 @@ const PokemonCard = () => {
         pokeInfo &&
         pokeName &&
         pokeInfo.map((el: any, infoId: number) => (
-          <li
+          <ul
             className="pokemon-card"
             key={infoId + 1}
             onClick={() => handleCardClick(infoId + 1)}
@@ -91,7 +91,7 @@ const PokemonCard = () => {
               )}
               <div>{el.type}</div>
             </CardContent>
-          </li>
+          </ul>
         ))
       )}
     </CardStyle>
@@ -102,11 +102,12 @@ export default PokemonCard;
 
 const CardStyle = styled.article`
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   padding: 5px;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   .pokemon-card {
     list-style: none;
     padding: 5px;

@@ -7,7 +7,8 @@ const Footer = () => {
 export default Footer;
 
 const FooterStyle = styled.footer`
-  width: 100vw;
+  width: 100%;
   height: 150px;
   background-color: blue;
+  z-index: -1;
 `;

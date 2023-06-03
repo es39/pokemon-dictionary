@@ -17,16 +17,21 @@ const PokeDictionary = () => {
 
 export default PokeDictionary;
 
-const Container = styled.main`
-  width: 100vw;
+const Container = styled.section`
+  width: 100%;
   background-color: yellow;
   flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CardContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 10px;
+  width: 100%;
 `;
 
 const PokemonCards = styled.section`
