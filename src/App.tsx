@@ -11,12 +11,14 @@ const App = () => {
     <BrowserRouter>
       <GlobalStyle />
       <Header />
-      <Routes>
-        <Route path="/" element={<PokeDictionary />} />
-        <Route path="/typedic" element={<TypeDictionary />} />
-        <Route path="/genedic" element={<GeneDictionary />} />
-        <Route path="/:id" element={<PokemonInfo />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<PokeDictionary />} />
+          <Route path="/typedic" element={<TypeDictionary />} />
+          <Route path="/genedic" element={<GeneDictionary />} />
+          <Route path="/:id" element={<PokemonInfo />} />
+        </Routes>
+      </main>
       <Footer />
     </BrowserRouter>
   );
