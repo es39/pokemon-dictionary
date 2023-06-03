@@ -1,10 +1,11 @@
 import PokemonCard from 'components/PokemonCard';
+import SearchBar from 'components/SearchBar';
 import styled from 'styled-components';
 
 const PokeDictionary = () => {
   return (
     <Container>
-      <SearchBar>검색창</SearchBar>
+      <SearchBar />
       <CardContainer>
         <PokemonCards>
           <PokemonCard />
@@ -20,13 +21,6 @@ const Container = styled.main`
   width: 100vw;
   background-color: yellow;
   flex-direction: column;
-`;
-
-const SearchBar = styled.section`
-  display: flex;
-  background-color: white;
-  width: 100vw;
-  height: 50px;
 `;
 
 const CardContainer = styled.section`
