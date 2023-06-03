@@ -5,6 +5,7 @@ const SearchBar = () => {
   return (
     <Container>
       <SearchArea>
+        <input placeholder="포켓몬 이름을 한글로 입력해주세요..!"></input>
         <SearchWrapper>
           <SearchIcon />
         </SearchWrapper>
@@ -16,12 +17,13 @@ const SearchBar = () => {
 export default SearchBar;
 
 const Container = styled.section`
-  width: 100vw;
+  width: 100%;
   min-height: 50px;
   background-color: yellow;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 15px;
 `;
 
 const SearchArea = styled.div`
@@ -30,27 +32,38 @@ const SearchArea = styled.div`
   height: 50px;
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0);
+  > input {
+    border: none;
+    width: 100%;
+    height: 90%;
+    border-radius: 20px;
+    padding-left: 10px;
+  }
 `;
 
 const SearchWrapper = styled.button`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: calc(100% / 10);
+  width: 5%;
   height: 100%;
   cursor: pointer;
   background: transparent;
   border: none;
-  width: 90%;
+  padding-right: 10px;
 `;
 
 const SearchIcon = styled(BiSearch)`
-  color: red;
+  color: black;
   font-weight: bold;
   font-size: 2em;
   cursor: pointer;
 `;
+
+/* TODO:
+1. position 속성 알아보기 
+*/
