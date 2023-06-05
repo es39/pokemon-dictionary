@@ -21,6 +21,7 @@
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.1",
     "recoil": "^0.7.7",
+    "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.11",
     "sweetalert2": "^11.7.3",
     "toastr": "^2.1.4",
