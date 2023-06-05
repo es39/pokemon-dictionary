@@ -1,11 +1,29 @@
+import { ChangeEvent, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import styled from 'styled-components';
 
 const SearchBar = () => {
+  // * 검색 상태
+  const [pokeSearch, setPokeSearch] = useState<string>('');
+
+  // * 검색 onChange event
+  const handlePokemonSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setPokeSearch(e.target.value);
+  };
+
+  console.log(pokeSearch);
+
+  // const handleClickSearch = (e: React.MouseEvent) => {
+
+  // }
+
   return (
     <Container>
       <SearchArea>
-        <input placeholder="포켓몬 이름을 한글로 입력해주세요..!"></input>
+        <input
+          placeholder="포켓몬 이름을 한글로 입력해주세요..!"
+          onChange={handlePokemonSearch}
+        ></input>
         <SearchWrapper>
           <SearchIcon />
         </SearchWrapper>
