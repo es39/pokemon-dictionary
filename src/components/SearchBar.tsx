@@ -84,4 +84,5 @@ const SearchIcon = styled(BiSearch)`
 
 /* TODO:
 1. position 속성 알아보기 
+2. 검색을 위한 포켓몬 정보 전역으로 관리하기
 */
