@@ -70,31 +70,33 @@ const PokemonCard = () => {
   }, []);
 
   return (
-    <CardStyle>
+    <>
       {isLoading ? (
         <Loader />
       ) : (
-        pokeInfo &&
-        pokeName &&
-        pokeInfo.map((el: any, infoId: number) => (
-          <ul
-            className="pokemon-card"
-            key={infoId + 1}
-            onClick={() => handleCardClick(infoId + 1)}
-          >
-            <CardContent>
-              <img src={el.image} />
-              {pokeName.map((el: any, nameId: number) =>
-                infoId === nameId ? (
-                  <li key={nameId + 1}>{el.koreaName}</li>
-                ) : null
-              )}
-              <div>{el.type}</div>
-            </CardContent>
-          </ul>
-        ))
+        <CardStyle>
+          {pokeInfo &&
+            pokeName &&
+            pokeInfo.map((el: any, infoId: number) => (
+              <ul
+                className="pokemon-card"
+                key={infoId + 1}
+                onClick={() => handleCardClick(infoId + 1)}
+              >
+                <CardContent>
+                  <img src={el.image} />
+                  {pokeName.map((el: any, nameId: number) =>
+                    infoId === nameId ? (
+                      <li key={nameId + 1}>{el.koreaName}</li>
+                    ) : null
+                  )}
+                  <div>{el.type}</div>
+                </CardContent>
+              </ul>
+            ))}
+        </CardStyle>
       )}
-    </CardStyle>
+    </>
   );
 };
 
