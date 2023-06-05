@@ -12,6 +12,6 @@ const Loader = () => {
 export default Loader;
 
 const Container = styled.main`
-  width: 100vw;
+  justify-content: center;
   align-items: center;
 `;
