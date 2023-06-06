@@ -44,4 +44,31 @@ interface pokeSprites {
 //   id: number;
 // }
 
-export type { pokemonName, pokemonImg, type, pokeSprites };
+// * 포켓몬 한글 이름
+interface pokeKoreaName {
+  id: number;
+  koreaName: string;
+}
+
+interface pokeKoreaNameProps {
+  pokeName: pokeKoreaName[];
+}
+
+interface pokeNameProps {
+  pokeName: {
+    id: number;
+    key: number;
+    koreaName: string;
+  };
+}
+[];
+
+export type {
+  pokemonName,
+  pokemonImg,
+  type,
+  pokeSprites,
+  pokeKoreaName,
+  pokeKoreaNameProps,
+  pokeNameProps,
+};
